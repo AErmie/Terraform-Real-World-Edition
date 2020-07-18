@@ -27,3 +27,6 @@ override.tf.json
 
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
+
+# Exclude the text file that contains the Personal Access Token Keys
+keys.txt
