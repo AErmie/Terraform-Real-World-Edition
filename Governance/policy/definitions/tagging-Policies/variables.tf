@@ -1,0 +1,3 @@
+variable "MgmtGroupID" {
+  type = "string"
+}
