@@ -28,4 +28,4 @@ override.tf.json
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
 AzureDevOps/keys.txt
-Networking/Deployments/Network-Deployment/CommandLineParams.txt
+CommandLineParams.txt
