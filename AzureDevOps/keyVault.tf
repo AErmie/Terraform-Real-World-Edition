@@ -23,7 +23,7 @@ resource "azurerm_key_vault" "ADO_KV" {
   sku_name = "standard"
 
   network_acls {
-    default_action = "Deny" #NOTE: Default action should be 'Deny'
+    default_action = "Allow" #NOTE: Default action should be 'Deny', but using Allow to read from local command-line
     bypass         = "AzureServices"
   }
 

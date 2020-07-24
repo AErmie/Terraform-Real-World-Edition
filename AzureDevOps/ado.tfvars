@@ -1,2 +1,11 @@
-# TenantID      = "b033afe0-c9e4-48f6-99d3-d00269efb830"
-# SubscriptionID   = "c28db86b-8ce1-4755-aa09-fc99f6e0a667"
+# Azure DevOps settings:
+ADOProjectName = "TF Real-World Examples Project"
+ADOProjectDescription = "Example ADO project with real-world scenarios."
+ADOProjectVisibility = "private"
+ADOVersionControl = "Git"
+ADOWorkItemTemplate = "Agile"
+ADOFeature_Boards = "enabled"
+ADOFeature_Repositories = "enabled"
+ADOFeature_Pipelines = "enabled"
+ADOFeature_TestPlans = "enabled"
+ADOFeature_Artifacts = "enabled"

@@ -1,15 +1,15 @@
 resource "azuredevops_project" "adoproj" {
-  project_name       = "TF Real-World Examples Project"
-  description  = "Example ADO project with real-world scenarios."
-  visibility         = "public" #Options: private, public
-  version_control    = "Git" #Options: Git, Tfvc
-  work_item_template = "Agile" #Options: Agile, Basic, CMMI, Scrum
+  project_name       = var.ADOProjectName
+  description  = var.ADOProjectDescription
+  visibility         = var.ADOProjectVisibility
+  version_control    = var.ADOVersionControl
+  work_item_template = var.ADOWorkItemTemplate
   features = {
-      "boards" = "enabled"
-      "repositories" = "enabled"
-      "pipelines" = "enabled"
-      "testplans" = "enabled"
-      "artifacts" = "enabled"
+      "boards" = var.ADOFeature_Boards
+      "repositories" = var.ADOFeature_Repositories
+      "pipelines" = var.ADOFeature_Pipelines
+      "testplans" = var.ADOFeature_TestPlans
+      "artifacts" = var.ADOFeature_Artifacts
   }
 }
 
