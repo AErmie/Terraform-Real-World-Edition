@@ -14,6 +14,6 @@ resource "azuredevops_git_repository" "new_repo" {
 #   initialization {
 #     init_type = "Import" #Options: Uninitialized, Clean, or Import
 #     source_type = "Git" # Type type of the source repository. Used if the init_type is Import.
-#     source_url = "https://github.com/AErmie/Terraform-Real-World-Edition" # The URL of the source repository. Used if the init_type is Import.
+#     source_url = "https://github.com/<URL>" # The URL of the source repository. Used if the init_type is Import.
 #   }
 # }

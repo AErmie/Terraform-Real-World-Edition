@@ -1,9 +1,13 @@
-// Configuration of AzureRm service endpoint
+// Configuration of AzureRM service endpoint
 resource "azuredevops_serviceendpoint_azurerm" "Azure_ServiceEndpoint" {
   project_id                = azuredevops_project.adoproj.id
   service_endpoint_name     = "Azure Service Connection"
-  azurerm_spn_tenantid      = "b033afe0-c9e4-48f6-99d3-d00269efb830"
-  azurerm_subscription_id   = "c28db86b-8ce1-4755-aa09-fc99f6e0a667"
+  credentials {
+    serviceprincipalid  = var.ClientID
+    serviceprincipalkey = var.ClientSecret
+  }
+  azurerm_spn_tenantid      = data.azurerm_client_config.current.tenant_id
+  azurerm_subscription_id   = data.azurerm_client_config.current.subscription_id
   azurerm_subscription_name = "Visual Studio Enterprise"
 }
 
@@ -20,15 +24,15 @@ resource "azuredevops_serviceendpoint_azurerm" "Azure_ServiceEndpoint" {
 #   }
 # }
 
-resource "azuredevops_serviceendpoint_github" "GitHub_ServiceEndpoint" {
-  project_id            = azuredevops_project.adoproj.id
-  service_endpoint_name = "GithHub Personal Access Token"
+# resource "azuredevops_serviceendpoint_github" "GitHub_ServiceEndpoint" {
+#   project_id            = azuredevops_project.adoproj.id
+#   service_endpoint_name = "GithHub Personal Access Token"
 
-  auth_personal {
-    # Also can be set with AZDO_GITHUB_SERVICE_CONNECTION_PAT environment variable
-    personal_access_token = "something"
-  }
-}
+#   auth_personal {
+#     # Also can be set with AZDO_GITHUB_SERVICE_CONNECTION_PAT environment variable
+#     personal_access_token = "something"
+#   }
+# }
 
 # resource "azuredevops_serviceendpoint_github" "GitHub_ServiceEndpoint" {
 #   project_id = azuredevops_project.adoproj.id

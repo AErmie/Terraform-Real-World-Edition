@@ -3,8 +3,13 @@ resource "azurerm_resource_group" "ADO_RG" {
   location = "Canada Central"
 }
 
+resource "random_integer" "rndnum" {
+  min     = 1
+  max     = 999
+}
+
 resource "azurerm_key_vault" "ADO_KV" {
-  name                        = "ADOKeyVault-Terraform"
+  name                        = "ADOKeyVault-Terraform-${random_integer.rndnum.result}"
   location                    = azurerm_resource_group.ADO_RG.location
   resource_group_name         = azurerm_resource_group.ADO_RG.name
   tenant_id                   = data.azurerm_client_config.current.tenant_id
@@ -18,7 +23,7 @@ resource "azurerm_key_vault" "ADO_KV" {
   sku_name = "standard"
 
   network_acls {
-    default_action = "Allow"
+    default_action = "Allow" #NOTE: Default action should be 'Deny'
     bypass         = "AzureServices"
   }
 
@@ -34,40 +39,86 @@ resource "azurerm_key_vault_access_policy" "Current" {
 
   #Options: backup, create, decrypt, delete, encrypt, get, import, list, purge, recover, restore, sign, unwrapKey, update, verify and wrapKey.
   key_permissions = [
-    "backup", "create", "decrypt", "delete", "encrypt", "get", "import", "list", "purge", "recover", "restore", "sign", "unwrapKey", "update", "verify", "wrapKey"
+    "Get",
+    "List",
+    "Update",
+    "Restore",
+    "Backup",
+    "Recover",
+    "Delete",
+    "Import",
+    "Create",
   ]
 
   #Options: backup, delete, get, list, purge, recover, restore and set.
   secret_permissions = [
-    "backup", "delete", "get", "list", "purge", "recover", "restore", "set"
+    "Get",
+    "List",
+    "Set",
+    "Delete",
+    "Recover",
+    "Backup",
+    "Restore",
   ]
 
   #Options: backup, delete, deletesas, get, getsas, list, listsas, purge, recover, regeneratekey, restore, set, setsas and update.
   storage_permissions = [
-    "backup", "delete", "deletesas", "get", "getsas", "list", "listsas", "purge", "recover", "regeneratekey", "restore", "set", "setsas", "update"
+    "backup", 
+    "delete", 
+    "deletesas", 
+    "get", 
+    "getsas", 
+    "list", 
+    "listsas", 
+    "purge", 
+    "recover", 
+    "regeneratekey", 
+    "restore", 
+    "set", 
+    "setsas", 
+    "update",
+  ]
+
+  certificate_permissions = [
+    "Get",
+    "List",
+    "Update",
+    "Create",
+    "Import",
+    "Delete",
+    "Recover",
+    "Backup",
+    "Restore",
+    "ManageContacts",
+    "DeleteIssuers",
+    "SetIssuers",
+    "ListIssuers",
+    "ManageIssuers",
+    "GetIssuers",
   ]
 }
 
-resource "azurerm_key_vault_access_policy" "AzureServiceEndpoint" {
+resource "azurerm_key_vault_access_policy" "SPNAccess" {
   key_vault_id = azurerm_key_vault.ADO_KV.id
-  tenant_id = data.azurerm_client_config.current.tenant_id
-  object_id = azuredevops_serviceendpoint_azurerm.Azure_ServiceEndpoint.id
+  tenant_id = azurerm_key_vault.ADO_KV.tenant_id
+  object_id = var.ClientID
 
-  #Options: backup, create, decrypt, delete, encrypt, get, import, list, purge, recover, restore, sign, unwrapKey, update, verify and wrapKey.
-  key_permissions = [
-    "backup", "create", "decrypt", "delete", "encrypt", "get", "import", "list", "purge", "recover", "restore", "sign", "unwrapKey", "update", "verify", "wrapKey"
-  ]
-
-  #Options: backup, delete, get, list, purge, recover, restore and set.
   secret_permissions = [
-    "backup", "delete", "get", "list", "purge", "recover", "restore", "set"
-  ]
-
-  #Options: backup, delete, deletesas, get, getsas, list, listsas, purge, recover, regeneratekey, restore, set, setsas and update.
-  storage_permissions = [
-    "backup", "delete", "deletesas", "get", "getsas", "list", "listsas", "purge", "recover", "regeneratekey", "restore", "set", "setsas", "update"
+    "get",
+    "List",
   ]
 }
+
+# resource "azurerm_key_vault_access_policy" "AzureServiceEndpoint" {
+#   key_vault_id = azurerm_key_vault.ADO_KV.id
+#   tenant_id = data.azurerm_client_config.current.tenant_id
+#   object_id = azuredevops_serviceendpoint_azurerm.Azure_ServiceEndpoint.id
+
+#   secret_permissions = [
+#     "get",
+#     "List",
+#   ]
+# }
 
 
 resource "azurerm_key_vault_secret" "ADOKeyVault_SASKey" {
