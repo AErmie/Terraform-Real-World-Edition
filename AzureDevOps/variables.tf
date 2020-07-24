@@ -94,3 +94,45 @@ variable "AzureAD_SPN_Password_Expiry" {
     type = string
     description = "The End Date which the Password is valid until, formatted as a RFC3339 date string (e.g. 2018-01-01T01:02:03Z)."
 }
+
+# Azure Key Vault properties: 
+variable "AzureKeyVault_ResourceGroup_Name" {
+    type = string
+    description = "The name for the Resource Group that will contain the KeyVault."
+}
+variable "AzureKeyVault_ResourceGroup_Location" {
+    type = string
+    description = "The lovation for the Resource Group that will contain the KeyVault."
+}
+variable "AzureKeyVault_EnabledForDeployment" {
+    type = bool
+    description = "Boolean flag to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault. Defaults to false."
+}
+variable "AzureKeyVault_EnabledForDiskEncryption" {
+    type = bool
+    description = "Boolean flag to specify whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys. Defaults to false."
+}
+variable "AzureKeyVault_EnabledForTemplateDeployment" {
+    type = bool
+    description = "Boolean flag to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault. Defaults to false."
+}
+variable "AzureKeyVault_SoftDeleteEnabled" {
+    type = bool
+    description = "Should Soft Delete be enabled for this Key Vault? Defaults to false."
+}
+variable "AzureKeyVault_PurgeProtectionEnabled" {
+    type = bool
+    description = "Is Purge Protection enabled for this Key Vault? Defaults to false."
+}
+variable "AzureKeyVault_SKUName" {
+    type = string
+    description = "The Name of the SKU used for this Key Vault. Possible values are standard and premium."
+}
+variable "AzureKeyVault_NetworkACLS_DefaultAction" {
+    type = string
+    description = "The Default Action to use when no rules match from ip_rules / virtual_network_subnet_ids. Possible values are Allow and Deny."
+}
+variable "AzureKeyVault_NetworkACLS_Bypass" {
+    type = string
+    description = "Specifies which traffic can bypass the network rules. Possible values are AzureServices and None."
+}

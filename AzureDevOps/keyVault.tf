@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "ADO_RG" {
-  name     = "AzureDevOpsRG"
-  location = "Canada Central"
+  name     = var.AzureKeyVault_ResourceGroup_Name
+  location = var.AzureKeyVault_ResourceGroup_Location
 }
 
 resource "random_integer" "rndnum" {
@@ -14,17 +14,17 @@ resource "azurerm_key_vault" "ADO_KV" {
   resource_group_name         = azurerm_resource_group.ADO_RG.name
   tenant_id                   = data.azurerm_client_config.current.tenant_id
 
-  enabled_for_deployment = true
-  enabled_for_disk_encryption = true
-  enabled_for_template_deployment = true
-  soft_delete_enabled         = true
-  purge_protection_enabled    = false
+  enabled_for_deployment = var.AzureKeyVault_EnabledForDeployment
+  enabled_for_disk_encryption = var.AzureKeyVault_EnabledForDiskEncryption
+  enabled_for_template_deployment = var.AzureKeyVault_EnabledForTemplateDeployment
+  soft_delete_enabled         = var.AzureKeyVault_SoftDeleteEnabled
+  purge_protection_enabled    = var.AzureKeyVault_PurgeProtectionEnabled
 
-  sku_name = "standard"
+  sku_name = var.AzureKeyVault_SKUName
 
   network_acls {
-    default_action = "Allow" #NOTE: Default action should be 'Deny', but using Allow to read from local command-line
-    bypass         = "AzureServices"
+    default_action = var.AzureKeyVault_NetworkACLS_DefaultAction
+    bypass         = var.AzureKeyVault_NetworkACLS_Bypass
   }
 
   tags = {
