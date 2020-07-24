@@ -1,9 +1,9 @@
 resource "azuredevops_build_definition" "HubDeployPipeline" {
   project_id      = azuredevops_project.adoproj.id
-  name = "ADO-Terraform-IAC (Hub Deploy)"
+  name            = "ADO-Terraform-IAC (Hub Deploy)"
   agent_pool_name = "Hosted Ubuntu 1604"
-  path = "\\BuildDefinitions"
-  
+  path            = "\\BuildDefinitions"
+
   ci_trigger {
     use_yaml = true
   }
@@ -22,10 +22,10 @@ resource "azuredevops_build_definition" "HubDeployPipeline" {
 
 resource "azuredevops_build_definition" "SpokeDeployPipeline" {
   project_id      = azuredevops_project.adoproj.id
-  name = "ADO-Terraform-IAC (Spoke Deploy)"
-  path = "\\BuildDefinitions"
+  name            = "ADO-Terraform-IAC (Spoke Deploy)"
+  path            = "\\BuildDefinitions"
   agent_pool_name = "Hosted Ubuntu 1604"
-  
+
   ci_trigger {
     use_yaml = true
   }
@@ -44,10 +44,10 @@ resource "azuredevops_build_definition" "SpokeDeployPipeline" {
 
 resource "azuredevops_build_definition" "PeeringDeployPipeline" {
   project_id      = azuredevops_project.adoproj.id
-  name = "ADO-Terraform-IAC (Peering Deploy)"
-  path = "\\BuildDefinitions"
+  name            = "ADO-Terraform-IAC (Peering Deploy)"
+  path            = "\\BuildDefinitions"
   agent_pool_name = "Hosted Ubuntu 1604"
-  
+
   ci_trigger {
     use_yaml = true
   }

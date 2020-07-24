@@ -32,29 +32,29 @@ resource "azuredevops_variable_group" "varGroupPipe" {
   # but not sourced from Azure Key Vault
   ## Azure environment specific variables:
   variable {
-   name = "subscription_id"
-   value = "c28db86b-8ce1-4755-aa09-fc99f6e0a667"
+    name  = "subscription_id"
+    value = "c28db86b-8ce1-4755-aa09-fc99f6e0a667"
   }
   variable {
-   name = "application_id"
-   value = "cb8b3e7b-d65c-4307-aa8f-20cc1d5b3498"
+    name  = "application_id"
+    value = "cb8b3e7b-d65c-4307-aa8f-20cc1d5b3498"
   }
   variable {
-   name = "tenant_id"
-   value = "b033afe0-c9e4-48f6-99d3-d00269efb830"
+    name  = "tenant_id"
+    value = "b033afe0-c9e4-48f6-99d3-d00269efb830"
   }
 
   ## Terraform state specific variables:
   variable {
-   name = "StorageResourceGroup"
-   value = "TerraformStateRG"
+    name  = "StorageResourceGroup"
+    value = "TerraformStateRG"
   }
   variable {
-   name = "StorageAccountName"
-   value = "terraformstatesaae"
+    name  = "StorageAccountName"
+    value = "terraformstatesaae"
   }
   variable {
-   name = "ContainerName"
-   value = "tfstate"
+    name  = "ContainerName"
+    value = "tfstate"
   }
 }

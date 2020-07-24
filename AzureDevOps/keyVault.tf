@@ -4,21 +4,21 @@ resource "azurerm_resource_group" "ADO_RG" {
 }
 
 resource "random_integer" "rndnum" {
-  min     = 1
-  max     = 999
+  min = 1
+  max = 999
 }
 
 resource "azurerm_key_vault" "ADO_KV" {
-  name                        = "ADOKeyVault-Terraform-${random_integer.rndnum.result}"
-  location                    = azurerm_resource_group.ADO_RG.location
-  resource_group_name         = azurerm_resource_group.ADO_RG.name
-  tenant_id                   = data.azurerm_client_config.current.tenant_id
+  name                = "ADOKeyVault-Terraform-${random_integer.rndnum.result}"
+  location            = azurerm_resource_group.ADO_RG.location
+  resource_group_name = azurerm_resource_group.ADO_RG.name
+  tenant_id           = data.azurerm_client_config.current.tenant_id
 
-  enabled_for_deployment = var.AzureKeyVault_EnabledForDeployment
-  enabled_for_disk_encryption = var.AzureKeyVault_EnabledForDiskEncryption
+  enabled_for_deployment          = var.AzureKeyVault_EnabledForDeployment
+  enabled_for_disk_encryption     = var.AzureKeyVault_EnabledForDiskEncryption
   enabled_for_template_deployment = var.AzureKeyVault_EnabledForTemplateDeployment
-  soft_delete_enabled         = var.AzureKeyVault_SoftDeleteEnabled
-  purge_protection_enabled    = var.AzureKeyVault_PurgeProtectionEnabled
+  soft_delete_enabled             = var.AzureKeyVault_SoftDeleteEnabled
+  purge_protection_enabled        = var.AzureKeyVault_PurgeProtectionEnabled
 
   sku_name = var.AzureKeyVault_SKUName
 
@@ -34,8 +34,8 @@ resource "azurerm_key_vault" "ADO_KV" {
 
 resource "azurerm_key_vault_access_policy" "Current" {
   key_vault_id = azurerm_key_vault.ADO_KV.id
-  tenant_id = data.azurerm_client_config.current.tenant_id
-  object_id = data.azurerm_client_config.current.object_id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = data.azurerm_client_config.current.object_id
 
   #Options: backup, create, decrypt, delete, encrypt, get, import, list, purge, recover, restore, sign, unwrapKey, update, verify and wrapKey.
   key_permissions = [
@@ -63,19 +63,19 @@ resource "azurerm_key_vault_access_policy" "Current" {
 
   #Options: backup, delete, deletesas, get, getsas, list, listsas, purge, recover, regeneratekey, restore, set, setsas and update.
   storage_permissions = [
-    "backup", 
-    "delete", 
-    "deletesas", 
-    "get", 
-    "getsas", 
-    "list", 
-    "listsas", 
-    "purge", 
-    "recover", 
-    "regeneratekey", 
-    "restore", 
-    "set", 
-    "setsas", 
+    "backup",
+    "delete",
+    "deletesas",
+    "get",
+    "getsas",
+    "list",
+    "listsas",
+    "purge",
+    "recover",
+    "regeneratekey",
+    "restore",
+    "set",
+    "setsas",
     "update",
   ]
 
@@ -100,8 +100,8 @@ resource "azurerm_key_vault_access_policy" "Current" {
 
 resource "azurerm_key_vault_access_policy" "SPNAccess" {
   key_vault_id = azurerm_key_vault.ADO_KV.id
-  tenant_id = azurerm_key_vault.ADO_KV.tenant_id
-  object_id = azuread_service_principal.ADOSPN.object_id
+  tenant_id    = azurerm_key_vault.ADO_KV.tenant_id
+  object_id    = azuread_service_principal.ADOSPN.object_id
 
   secret_permissions = [
     "get",

@@ -1,7 +1,7 @@
 // Configuration of AzureRM service endpoint
 resource "azuredevops_serviceendpoint_azurerm" "Azure_ServiceEndpoint" {
-  project_id                = azuredevops_project.adoproj.id
-  service_endpoint_name     = var.ADOServiceEndpointName
+  project_id            = azuredevops_project.adoproj.id
+  service_endpoint_name = var.ADOServiceEndpointName
   credentials {
     serviceprincipalid  = azuread_service_principal.ADOSPN.application_id
     serviceprincipalkey = random_string.password.result

@@ -1,15 +1,15 @@
 resource "azuredevops_project" "adoproj" {
   project_name       = var.ADOProjectName
-  description  = var.ADOProjectDescription
+  description        = var.ADOProjectDescription
   visibility         = var.ADOProjectVisibility
   version_control    = var.ADOVersionControl
   work_item_template = var.ADOWorkItemTemplate
   features = {
-      "boards" = var.ADOFeature_Boards
-      "repositories" = var.ADOFeature_Repositories
-      "pipelines" = var.ADOFeature_Pipelines
-      "testplans" = var.ADOFeature_TestPlans
-      "artifacts" = var.ADOFeature_Artifacts
+    "boards"       = var.ADOFeature_Boards
+    "repositories" = var.ADOFeature_Repositories
+    "pipelines"    = var.ADOFeature_Pipelines
+    "testplans"    = var.ADOFeature_TestPlans
+    "artifacts"    = var.ADOFeature_Artifacts
   }
 }
 
