@@ -11,6 +11,7 @@ pool:
 
 variables:
   - group: Terraform Sensitive Variables
+  - group: Terraform Pipeline Variables
   - name: state_file
     value: deploy_spoke.tfstate
 
@@ -21,11 +22,11 @@ steps:
       terraformVersion: '0.12.28'
   - script: terraform version
     displayName: "Terraform Version"
-  - script:  az login --service-principal -u $(application_id) -p $(SPNPwd) --tenant $(tenant_id)
+  - script:  az login --service-principal -u $(application_id) -p $(spn-password) --tenant $(tenant_id)
     displayName: "Log Into Azure"
-  - script: terraform init -backend-config=resource_group_name=$(StorageResourceGroup) -backend-config="storage_account_name=$(StorageAccountName)" -backend-config="container_name=$(ContainerName)" -backend-config="access_key=$(SASKey)" -backend-config="key=$(StateFile)"
+  - script: terraform init -backend-config=resource_group_name=$(StorageResourceGroup) -backend-config="storage_account_name=$(StorageAccountName)" -backend-config="container_name=$(ContainerName)" -backend-config="access_key=$(storage-access-key)" -backend-config="key=$(StateFile)"
     displayName: "Terraform Init"
     workingDirectory: $(System.DefaultWorkingDirectory)/Networking/Deployments/Network-Deployment/Spoke-Deploy
-  - script: terraform destroy -var="client_id=$(application_id)" -var="client_secret=$(SPNPwd)" -var="tenant_id=$(tenant_id)" -var="subscription_id=$(subscription_id)" -var-file="Spoke.tfvars" -auto-approve
+  - script: terraform destroy -var="client_id=$(application_id)" -var="client_secret=$(spn-password)" -var="tenant_id=$(tenant_id)" -var="subscription_id=$(subscription_id)" -var-file="Spoke.tfvars" -auto-approve
     displayName: "Terraform Destroy"
     workingDirectory: $(System.DefaultWorkingDirectory)/Networking/Deployments/Network-Deployment/Spoke-Deploy
