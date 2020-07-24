@@ -48,3 +48,12 @@ variable "ADONewRepoName" {
     description = "The name of the git repository."
 }
 
+# Azure DevOps service endpoint properties: 
+variable "ADOServiceEndpointName" {
+    type = string
+    description = "The Service Endpoint name."
+}
+variable "AzureSubscriptionName" {
+    type = string
+    description = "The name of the Azure subscription."
+}

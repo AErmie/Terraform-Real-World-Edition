@@ -1,14 +1,14 @@
 // Configuration of AzureRM service endpoint
 resource "azuredevops_serviceendpoint_azurerm" "Azure_ServiceEndpoint" {
   project_id                = azuredevops_project.adoproj.id
-  service_endpoint_name     = "Azure Service Connection"
+  service_endpoint_name     = var.ADOServiceEndpointName
   credentials {
     serviceprincipalid  = azuread_service_principal.ADOSPN.application_id
     serviceprincipalkey = random_string.password.result
   }
   azurerm_spn_tenantid      = data.azurerm_client_config.current.tenant_id
   azurerm_subscription_id   = data.azurerm_client_config.current.subscription_id
-  azurerm_subscription_name = "Visual Studio Enterprise"
+  azurerm_subscription_name = var.AzureSubscriptionName
 }
 
 # Make sure to set the following environment variables:

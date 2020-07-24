@@ -12,3 +12,8 @@ ADOFeature_Artifacts = "enabled"
 
 # Azure DevOps repository settings: 
 ADONewRepoName = "ADO Native Repo"
+
+# Azure DevOps service endpoint settings:
+ADOServiceEndpointName = "Azure Service Connection"
+AzureSubscriptionName = "Visual Studio Enterprise"
+
