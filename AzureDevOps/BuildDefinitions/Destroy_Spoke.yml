@@ -19,7 +19,7 @@ steps:
   - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
     displayName: "Install Terraform"
     inputs:
-      terraformVersion: '0.12.28'
+      terraformVersion: '0.12.29'
   - script: terraform version
     displayName: "Terraform Version"
   - script:  az login --service-principal -u $(application_id) -p $(spn-password) --tenant $(tenant_id)
