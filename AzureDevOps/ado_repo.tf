@@ -1,6 +1,6 @@
 resource "azuredevops_git_repository" "new_repo" {
   project_id = azuredevops_project.adoproj.id
-  name       = "ADO Native Repo"
+  name       = var.ADONewRepoName
   initialization {
     init_type = "Clean" #Options: Uninitialized, Clean, or Import
   }

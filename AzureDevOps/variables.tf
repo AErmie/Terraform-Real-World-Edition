@@ -1,3 +1,4 @@
+# Azure DevOps project properties: 
 variable "ADOProjectName" {
     type = string
     description = "Azure DevOps project name"
@@ -39,5 +40,11 @@ variable "ADOFeature_TestPlans" {
 variable "ADOFeature_Artifacts" {
     type = string
     description = " Defines the status (enabled, disabled) of the project features."
+}
+
+# Azure DevOps repository properties: 
+variable "ADONewRepoName" {
+    type = string
+    description = "The name of the git repository."
 }
 

@@ -1,4 +1,4 @@
-# Azure DevOps settings:
+# Azure DevOps project settings:
 ADOProjectName = "TF Real-World Examples Project"
 ADOProjectDescription = "Example ADO project with real-world scenarios."
 ADOProjectVisibility = "private"
@@ -9,3 +9,6 @@ ADOFeature_Repositories = "enabled"
 ADOFeature_Pipelines = "enabled"
 ADOFeature_TestPlans = "enabled"
 ADOFeature_Artifacts = "enabled"
+
+# Azure DevOps repository settings: 
+ADONewRepoName = "ADO Native Repo"
