@@ -57,3 +57,33 @@ variable "AzureSubscriptionName" {
     type = string
     description = "The name of the Azure subscription."
 }
+
+# Azure DevOps variable properties: 
+variable "ADOVariableGroup_WithKeyVault_Name" {
+    type = string
+    description = "The name of the Variable Group."
+}
+variable "ADOVariableGroup_WithKeyVault_Description" {
+    type = string
+    description = "The description of the Variable Group."
+}
+variable "ADOVariableGroup_WithKeyVault_AllowAccessToAllPipelines" {
+    type = bool
+    description = "Boolean that indicate if this variable group is shared by all pipelines of this project."
+}
+
+variable "ADOVariableGroup_WithoutKeyVault_Name" {
+    type = string
+    description = "The name of the Variable Group."
+}
+variable "ADOVariableGroup_WithoutKeyVault_Description" {
+    type = string
+    description = "The description of the Variable Group."
+}
+variable "ADOVariableGroup_WithoutKeyVault_AllowAccessToAllPipelines" {
+    type = bool
+    description = "Boolean that indicate if this variable group is shared by all pipelines of this project."
+}
+
+
+

@@ -17,3 +17,11 @@ ADONewRepoName = "ADO Native Repo"
 ADOServiceEndpointName = "Azure Service Connection"
 AzureSubscriptionName = "Visual Studio Enterprise"
 
+# Azure DevOps variable settings:
+ADOVariableGroup_WithKeyVault_Name = "Terraform Sensitive Variables"
+ADOVariableGroup_WithKeyVault_Description  = "This Variable Group should be linked to an Azure Key Vault"
+ADOVariableGroup_WithKeyVault_AllowAccessToAllPipelines = true
+
+ADOVariableGroup_WithoutKeyVault_Name = "Terraform Pipeline Variables"
+ADOVariableGroup_WithoutKeyVault_Description  = "Additional variables used with the Pipelines, but not kept in Azure Key Vault"
+ADOVariableGroup_WithoutKeyVault_AllowAccessToAllPipelines = true
