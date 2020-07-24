@@ -3,8 +3,8 @@ resource "azuredevops_serviceendpoint_azurerm" "Azure_ServiceEndpoint" {
   project_id                = azuredevops_project.adoproj.id
   service_endpoint_name     = "Azure Service Connection"
   credentials {
-    serviceprincipalid  = var.ClientID
-    serviceprincipalkey = var.ClientSecret
+    serviceprincipalid  = azuread_service_principal.ADOSPN.application_id
+    serviceprincipalkey = random_string.password.result
   }
   azurerm_spn_tenantid      = data.azurerm_client_config.current.tenant_id
   azurerm_subscription_id   = data.azurerm_client_config.current.subscription_id

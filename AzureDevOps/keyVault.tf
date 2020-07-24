@@ -23,7 +23,7 @@ resource "azurerm_key_vault" "ADO_KV" {
   sku_name = "standard"
 
   network_acls {
-    default_action = "Allow" #NOTE: Default action should be 'Deny'
+    default_action = "Deny" #NOTE: Default action should be 'Deny'
     bypass         = "AzureServices"
   }
 
@@ -101,7 +101,7 @@ resource "azurerm_key_vault_access_policy" "Current" {
 resource "azurerm_key_vault_access_policy" "SPNAccess" {
   key_vault_id = azurerm_key_vault.ADO_KV.id
   tenant_id = azurerm_key_vault.ADO_KV.tenant_id
-  object_id = var.ClientID
+  object_id = azuread_service_principal.ADOSPN.object_id
 
   secret_permissions = [
     "get",
@@ -109,18 +109,7 @@ resource "azurerm_key_vault_access_policy" "SPNAccess" {
   ]
 }
 
-# resource "azurerm_key_vault_access_policy" "AzureServiceEndpoint" {
-#   key_vault_id = azurerm_key_vault.ADO_KV.id
-#   tenant_id = data.azurerm_client_config.current.tenant_id
-#   object_id = azuredevops_serviceendpoint_azurerm.Azure_ServiceEndpoint.id
-
-#   secret_permissions = [
-#     "get",
-#     "List",
-#   ]
-# }
-
-
+## This is the storage account that holds the State files
 resource "azurerm_key_vault_secret" "ADOKeyVault_SASKey" {
   name         = "storage-access-key"
   value        = "IU8wQRYdXQNIuqa+uWHT1ueMJBlg76g2cg2tV9CEJhZC8ZqItIS1tvC1p00tkIM75VI+rSw/irZtaUGu3tyb5A=="
@@ -132,7 +121,7 @@ resource "azurerm_key_vault_secret" "ADOKeyVault_SASKey" {
 }
 resource "azurerm_key_vault_secret" "ADOKeyVault_SPNPwd" {
   name         = "spn-password"
-  value        = "8Ilxgf-hl~N~X~_aMf5I0GFka-c2MkSPr0"
+  value        = azuread_service_principal_password.ADOSPN.value
   key_vault_id = azurerm_key_vault.ADO_KV.id
 
   tags = {

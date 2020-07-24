@@ -45,12 +45,24 @@ output "ADORepoWebURL" {
 }
 
 #Pipeline outputs
-# output "ADOPipelineName" {
-#     value = azuredevops_build_definition.*.name
-# }
-# output "ADOPipelineID" {
-#     value = azuredevops_build_definition.*.id
-# }
+output "ADOPipelineName-Hub" {
+    value = azuredevops_build_definition.HubDeployPipeline.name
+}
+output "ADOPipelineID-Hub" {
+    value = azuredevops_build_definition.HubDeployPipeline.id
+}
+output "ADOPipelineName-Spoke" {
+    value = azuredevops_build_definition.SpokeDeployPipeline.name
+}
+output "ADOPipelineID-Spoke" {
+    value = azuredevops_build_definition.SpokeDeployPipeline.id
+}
+output "ADOPipelineName-Peering" {
+    value = azuredevops_build_definition.PeeringDeployPipeline.name
+}
+output "ADOPipelineID-Peering" {
+    value = azuredevops_build_definition.PeeringDeployPipeline.id
+}
 
 #Variable Group outputs
 output "ADOVariableGroupName" {
