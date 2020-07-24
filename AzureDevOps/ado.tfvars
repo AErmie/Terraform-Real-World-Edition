@@ -25,3 +25,9 @@ ADOVariableGroup_WithKeyVault_AllowAccessToAllPipelines = true
 ADOVariableGroup_WithoutKeyVault_Name = "Terraform Pipeline Variables"
 ADOVariableGroup_WithoutKeyVault_Description  = "Additional variables used with the Pipelines, but not kept in Azure Key Vault"
 ADOVariableGroup_WithoutKeyVault_AllowAccessToAllPipelines = true
+
+# AzureAD SPN settings: 
+AzureAD_ApplicationName = "ADO-Terraform-App"
+AzureAD_SPN_Password_Expiry = "2021-01-01T00:00:00Z"
+
+

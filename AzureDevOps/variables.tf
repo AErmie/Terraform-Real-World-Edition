@@ -85,5 +85,12 @@ variable "ADOVariableGroup_WithoutKeyVault_AllowAccessToAllPipelines" {
     description = "Boolean that indicate if this variable group is shared by all pipelines of this project."
 }
 
-
-
+# Azure DevOps SPN properties: 
+variable "AzureAD_ApplicationName" {
+    type = string
+    description = "The display name for the application."
+}
+variable "AzureAD_SPN_Password_Expiry" {
+    type = string
+    description = "The End Date which the Password is valid until, formatted as a RFC3339 date string (e.g. 2018-01-01T01:02:03Z)."
+}

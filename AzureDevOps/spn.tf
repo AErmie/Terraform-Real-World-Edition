@@ -1,5 +1,5 @@
 resource "azuread_application" "ADOSPN" {
-  name = "ADO-Terraform-App"
+  name = var.AzureAD_ApplicationName
 }
 
 resource "random_string" "password" {
@@ -14,7 +14,7 @@ resource "azuread_service_principal" "ADOSPN" {
 resource "azuread_service_principal_password" "ADOSPN" {
   service_principal_id = azuread_service_principal.ADOSPN.id
   value                = random_string.password.result
-  end_date             = "2021-01-01T00:00:00Z"
+  end_date             = var.AzureAD_SPN_Password_Expiry
 }
 
 resource "azurerm_role_assignment" "main" {
