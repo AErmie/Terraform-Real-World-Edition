@@ -31,4 +31,4 @@ override.tf.json
 # Exclude the text file that contains the Personal Access Token Keys
 keys.txt
 AzureDevOps/keys.txt
-CommandLineParams.txt
+Networking\Deployments\Network-Deployment\CommandLineParams.txt
