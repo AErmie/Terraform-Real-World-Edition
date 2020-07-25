@@ -136,3 +136,7 @@ variable "AzureKeyVault_NetworkACLS_Bypass" {
   type        = string
   description = "Specifies which traffic can bypass the network rules. Possible values are AzureServices and None."
 }
+variable "AzureKeyVault_Secret_SASKey" {
+  type = string
+  description = "Storage Access Key"
+}

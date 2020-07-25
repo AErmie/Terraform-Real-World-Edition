@@ -112,7 +112,7 @@ resource "azurerm_key_vault_access_policy" "SPNAccess" {
 ## This is the storage account that holds the State files
 resource "azurerm_key_vault_secret" "ADOKeyVault_SASKey" {
   name         = "storage-access-key"
-  value        = "IU8wQRYdXQNIuqa+uWHT1ueMJBlg76g2cg2tV9CEJhZC8ZqItIS1tvC1p00tkIM75VI+rSw/irZtaUGu3tyb5A=="
+  value        = var.AzureKeyVault_Secret_SASKey
   key_vault_id = azurerm_key_vault.ADO_KV.id
 
   tags = {

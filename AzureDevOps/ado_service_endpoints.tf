@@ -24,7 +24,7 @@ resource "azuredevops_serviceendpoint_azurerm" "Azure_ServiceEndpoint" {
 #   }
 # }
 
-# resource "azuredevops_serviceendpoint_github" "GitHub_ServiceEndpoint" {
+# resource "azuredevops_serviceendpoint_github" "GitHub_ServiceEndpoint_PAT" {
 #   project_id            = azuredevops_project.adoproj.id
 #   service_endpoint_name = "GithHub Personal Access Token"
 
@@ -34,7 +34,7 @@ resource "azuredevops_serviceendpoint_azurerm" "Azure_ServiceEndpoint" {
 #   }
 # }
 
-# resource "azuredevops_serviceendpoint_github" "GitHub_ServiceEndpoint" {
+# resource "azuredevops_serviceendpoint_github" "GitHub_ServiceEndpoint_GHApp" {
 #   project_id = azuredevops_project.adoproj.id
 #   service_endpoint_name = "GithHub Apps: Azure Pipelines"
 #   # Note Github Apps do not support a description and will always be empty string. Must be explicty set to override the default value.

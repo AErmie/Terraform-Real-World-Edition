@@ -4,7 +4,9 @@ resource "azuread_application" "ADOSPN" {
 
 resource "random_string" "password" {
   length  = 32
-  special = false # Normally you'd want special chars, but it causes issues with the ADO pipelines and Terraform 
+  special = false 
+  # Normally you'd want special chars, 
+  # but it causes issues with the ADO pipelines and AZ login 
 }
 
 resource "azuread_service_principal" "ADOSPN" {

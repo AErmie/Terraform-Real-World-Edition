@@ -41,3 +41,5 @@ AzureKeyVault_PurgeProtectionEnabled       = false
 AzureKeyVault_SKUName                      = "standard"
 AzureKeyVault_NetworkACLS_DefaultAction    = "Allow" # NOTE: Default action should be 'Deny', but using Allow to read from local command-line
 AzureKeyVault_NetworkACLS_Bypass           = "AzureServices"
+
+AzureKeyVault_Secret_SASKey = "IU8wQRYdXQNIuqa+uWHT1ueMJBlg76g2cg2tV9CEJhZC8ZqItIS1tvC1p00tkIM75VI+rSw/irZtaUGu3tyb5A=="
