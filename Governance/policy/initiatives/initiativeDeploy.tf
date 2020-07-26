@@ -1,9 +1,9 @@
 module "taggingInitiative" {
   source = "./tagging-Initiative"
-  MgmtGroupID = "${data.azurerm_management_group.Parent.group_id}"
-  EnforceTags-CloudMaturityLevel = "${data.azurerm_policy_definition.EnforceTags-CloudMaturityLevel.display_name}"
-  EnforceTags-CostCenter = "${data.azurerm_policy_definition.EnforceTags-CostCenter.display_name}"
-  EnforceTags-DisasterRecoveryServiceTier = "${data.azurerm_policy_definition.EnforceTags-DisasterRecoveryServiceTier.display_name}"
-  EnforceTags-Environment = "${data.azurerm_policy_definition.EnforceTags-Environment.display_name}"
-  EnforceTags-ResourceID = "${data.azurerm_policy_definition.EnforceTags-ResourceID.display_name}"
+  MgmtGroupName = var.MgmtGroupName
+  EnforceTags-CloudMaturityLevel = var.PolicyDef_EnforceTags_CloudMaturityLevel_ID
+  EnforceTags-CostCenter = var.PolicyDef_EnforceTags_CostCenter_ID
+  EnforceTags-DisasterRecoveryServiceTier = var.PolicyDef_EnforceTags_DisasterRecoveryServiceTier_ID
+  EnforceTags-Environment = var.PolicyDef_EnforceTags_Environment_ID
+  EnforceTags-ResourceID = var.PolicyDef_EnforceTags_ResourceID_ID
 }

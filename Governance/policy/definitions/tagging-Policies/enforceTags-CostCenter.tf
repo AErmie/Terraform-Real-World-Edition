@@ -1,4 +1,4 @@
-resource "azurerm_policy_definition" "EnforceTags-CostCenter" {
+resource "azurerm_policy_definition" "EnforceTags_CostCenter" {
   name                = "DEMO-Policy-AllResources-EnforceTags-CostCenter"
   policy_type         = "Custom"
   mode                = "Indexed"

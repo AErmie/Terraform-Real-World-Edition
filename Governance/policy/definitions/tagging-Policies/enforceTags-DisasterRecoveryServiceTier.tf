@@ -1,4 +1,4 @@
-resource "azurerm_policy_definition" "EnforceTags-DisasterRecoveryServiceTier" {
+resource "azurerm_policy_definition" "EnforceTags_DisasterRecoveryServiceTier" {
   name                = "DEMO-Policy-AllResources-EnforceTags-DisasterRecoveryServiceTier"
   policy_type         = "Custom"
   mode                = "Indexed"

@@ -1,4 +1,4 @@
-resource "azurerm_policy_definition" "EnforceTags-CloudMaturityLevel" {
+resource "azurerm_policy_definition" "EnforceTags_CloudMaturityLevel" {
   name                = "DEMO-Policy-AllResources-EnforceTags-CloudMaturityLevel"
   policy_type         = "Custom"
   mode                = "Indexed"

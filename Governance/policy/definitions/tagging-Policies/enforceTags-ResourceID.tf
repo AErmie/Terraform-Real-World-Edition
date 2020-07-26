@@ -1,4 +1,4 @@
-resource "azurerm_policy_definition" "EnforceTags-ResourceID" {
+resource "azurerm_policy_definition" "EnforceTags_ResourceID" {
   name                = "DEMO-Policy-AllResources-EnforceTags-ResourceID"
   policy_type         = "Custom"
   mode                = "Indexed"
