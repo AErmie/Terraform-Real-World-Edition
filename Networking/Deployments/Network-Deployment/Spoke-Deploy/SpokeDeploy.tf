@@ -3,10 +3,10 @@ terraform {
   required_version = ">=0.12.0"
   # Backend for configuring remote state files to Azure Storage
   backend "azurerm" {
-    resource_group_name   = "TerraformStateRG"
-    storage_account_name  = "terraformstatesaae"
-    container_name        = "tfstate"
-    key                   = "networking_spoke.tfstate"
+    # resource_group_name   = "TerraformStateRG"
+    # storage_account_name  = "terraformstatesaae"
+    # container_name        = "tfstate"
+    # key                   = "networking_spoke.tfstate"
   }
 }
 
