@@ -4,7 +4,7 @@ resource "azurerm_policy_definition" "AllowedLocations" {
   mode                = "Indexed"
   display_name        = "DEMO-Policy-Global-AllowedLocations"
   description         = "This policy enables you to restrict the locations your organization can specify when deploying resources. Use to enforce your geo-compliance requirements. Excludes resource groups, Microsoft.AzureActiveDirectory/b2cDirectories, and resources that use the 'global' region."
-  management_group_id = var.MgmtGroupID
+  management_group_name = var.MgmtGroupName
   metadata = <<META
   {
     "category": "DEMO-Custom"

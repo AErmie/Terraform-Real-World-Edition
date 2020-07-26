@@ -1,23 +1,25 @@
+# Configure the Azure Provider
 provider "azurerm" {
-  #version         = "1.22.1"
+  # While version is optional, we /strongly recommend/ using it to pin the version of the Provider being used
+  version = ">= 2.0.0"
+  #(Optional) The Subscription ID which should be used. This can also be sourced from the ARM_SUBSCRIPTION_ID Environment Variable.
+  # subscription_id = var.subscription_id
+  #(Optional) The Client ID which should be used. This can also be sourced from the ARM_CLIENT_ID Environment Variable.
+  # client_id       = var.client_id
+  # client_secret   = var.client_secret
+  #(Optional) The Tenant ID which should be used. This can also be sourced from the ARM_TENANT_ID Environment Variable.
+  # tenant_id       = var.tenant_id
+  #(Optional) The Cloud Environment which should be used. Possible values are public, usgovernment, german and china. Defaults to public. This can also be sourced from the ARM_ENVIRONMENT environment variable.
   environment = "public"
+  features {}
 }
 
 module "baselinePolicies" {
   source = "./baseline-Policies"
-  MgmtGroupID = data.azurerm_management_group.Parent.group_id
+  MgmtGroupName = var.MgmtGroupName
 }
 
 module "taggingPolicies" {
   source = "./tagging-Policies"
-  MgmtGroupID = data.azurerm_management_group.Parent.group_id
+  MgmtGroupName = var.MgmtGroupName
 }
-
-# NOTE: The BCDR policies, specifically the Backup Audit policy, requires the RSV Resource Group Name.
-# Also, the Backup Audit policy is a pre-release policy from the Azure Backup team, not public yet (or supported)
-# Recommend not deploying the BCDR policies until the Backup Audit policy is public/supported (as it might change)
-# module "bcdrPolicies" {
-#   source = "./BCDR-Policies"
-#   MgmtGroupID = data.azurerm_management_group.Parent.group_id
-#   # RSV-ResourceGroup-Name = "NAME_OF_RSV_RESOURCe_GROUP"
-# }
