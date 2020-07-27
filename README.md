@@ -4,10 +4,12 @@ This repo contains more realistic real-world environment examples that leverage 
 
 For example, there is a separate module codebase for deploying ...
 
-* An Azure DevOps (ADO) project, complete with pipelines, etc.
-* A hub-and-spoke (ie. shared services) network topology
-* Gorvernance and compliance environment guardrails
-* A set of Azure services that imitate a real-world application
+* An Azure DevOps (ADO) project, complete with a repo, pipelines, variable groups, etc.
+* A hub-and-spoke (ie. shared services) network topology complete with VNet peering
+* Governance and compliance environment guardrails, inclusive of:
+  * A Parent-Child Management Group hierarchy
+  * Policy definitions, initiatives, and assignments
+* A set of Azure services that imitate a real-world application (PENDING)
 
 ## Azure DevOps
 

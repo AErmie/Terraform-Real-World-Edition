@@ -4,7 +4,7 @@ resource "azurerm_policy_definition" "AuditResourceGroupLocks" {
   mode                = "All"
   display_name        = "DEMO-Policy-ResourceGroups-AuditResourceLocks"
   description         = "Audits all Resource Groups that have a specific Tag, for the CanNotDelete Resource Lock. Within this Policy, you sepcify the Tag Name and Tag Value that will be used for identifying the Resource Groups to audit."
-  management_group_id = var.MgmtGroupID
+  management_group_name = var.MgmtGroupName
   metadata = <<META
   {
     "category": "DEMO-Custom"

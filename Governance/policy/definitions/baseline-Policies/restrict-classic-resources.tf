@@ -4,7 +4,7 @@ resource "azurerm_policy_definition" "RestrictClassicResources" {
   mode                = "Indexed"
   display_name        = "DEMO-Policy-Global-RestrictClassicResources"
   description         = "This policy restricts the use of Classic Azure resources."
-  management_group_id = var.MgmtGroupID
+  management_group_name = var.MgmtGroupName
   metadata = <<META
   {
     "category": "DEMO-Custom"

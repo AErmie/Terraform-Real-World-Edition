@@ -1,7 +1,7 @@
 resource "azurerm_policy_assignment" "TaggingInitiative" {
   name                 = "DEMO-TaggingInitiative"
-  scope                = var.MgmtGroupID
-  policy_definition_id = var.Initiative-EnforceTags-ID
+  scope                = "/subscriptions/${var.SubscriptionID}"
+  policy_definition_id = var.PolicyInitiative_TaggingInitiative_ID
   description          = "Policy Assignment to enforce Tagging requirements."
   display_name         = "DEMO-TaggingInitiative-Assignment"
   parameters = <<PARAMETERS

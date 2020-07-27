@@ -1,21 +1,25 @@
-variable "MgmtGroupID" {
-  type        = "string"
+variable "MgmtGroupName" {
+  type        = string
   description = "This is the Management Group ID that you want to hold the Policy definitions. These should be held in the Parent Management Group."
 }
+variable "SubscriptionID" {
+  type        = string
+  description = "This is the Subscription ID that you want to hold the Policy definitions. These should be held in the Parent Management Group."
+}
 
-variable "Policy-AllowedLocations-ID" {
-  type        = "string"
+variable "PolicyDef_AllowedLocations_ID" {
+  type        = string
   description = "PolicyID for the AllowedLocations policy"
 }
-variable "Policy-AllowedVMSKUs-ID" {
-  type        = "string"
+variable "PolicyDef_AllowedVMSKUs_ID" {
+  type        = string
   description = "PolicyID for the AllowedVMSKUs policy"
 }
-variable "Policy-AuditResourceGroupLocks-ID" {
-  type        = "string"
+variable "PolicyDef_AuditResourceGroupLocks_ID" {
+  type        = string
   description = "PolicyID for the AuditResourceGroupLocks policy"
 }
-variable "Policy-RestrictClassicResources-ID" {
-  type        = "string"
+variable "PolicyDef_RestrictClassicResources_ID" {
+  type        = string
   description = "PolicyID for the RestrictClassicResources policy"
 }

@@ -1,36 +1,15 @@
-output "Policy-DefinitionID" {
-  value = [
-    azurerm_policy_definition.EnforceTags-Environment.id,
-    azurerm_policy_definition.EnforceTags-ResourceID.id,
-    azurerm_policy_definition.EnforceTags-CostCenter.id,
-    azurerm_policy_definition.EnforceTags-DisasterRecoveryServiceTier.id,
-    azurerm_policy_definition.EnforceTags-CloudMaturityLevel.id
-  ]
+output "PolicyDef_EnforceTags_CloudMaturityLevel_ID" {
+    value = azurerm_policy_definition.EnforceTags_CloudMaturityLevel.id
 }
-output "Policy-Name" {
-  value = [
-    azurerm_policy_definition.EnforceTags-Environment.name,
-    azurerm_policy_definition.EnforceTags-ResourceID.name,
-    azurerm_policy_definition.EnforceTags-CostCenter.name,
-    azurerm_policy_definition.EnforceTags-DisasterRecoveryServiceTier.name,
-    azurerm_policy_definition.EnforceTags-CloudMaturityLevel.id
-  ]
+output "PolicyDef_EnforceTags_CostCenter_ID" {
+    value = azurerm_policy_definition.EnforceTags_CostCenter.id
 }
-output "Policy-PolicyType" {
-  value = [
-    azurerm_policy_definition.EnforceTags-Environment.policy_type,
-    azurerm_policy_definition.EnforceTags-ResourceID.policy_type,
-    azurerm_policy_definition.EnforceTags-CostCenter.policy_type,
-    azurerm_policy_definition.EnforceTags-DisasterRecoveryServiceTier.policy_type,
-    azurerm_policy_definition.EnforceTags-CloudMaturityLevel.id
-  ]
+output "PolicyDef_EnforceTags_DisasterRecoveryServiceTier_ID" {
+    value = azurerm_policy_definition.EnforceTags_DisasterRecoveryServiceTier.id
 }
-output "Policy-ManagementGroup" {
-  value = [
-    azurerm_policy_definition.EnforceTags-Environment.management_group_id,
-    azurerm_policy_definition.EnforceTags-ResourceID.management_group_id,
-    azurerm_policy_definition.EnforceTags-CostCenter.management_group_id,
-    azurerm_policy_definition.EnforceTags-DisasterRecoveryServiceTier.management_group_id,
-    azurerm_policy_definition.EnforceTags-CloudMaturityLevel.id
-  ]
+output "PolicyDef_EnforceTags_Environment_ID" {
+    value = azurerm_policy_definition.EnforceTags_Environment.id
+}
+output "PolicyDef_EnforceTags_ResourceID_ID" {
+    value = azurerm_policy_definition.EnforceTags_ResourceID.id
 }

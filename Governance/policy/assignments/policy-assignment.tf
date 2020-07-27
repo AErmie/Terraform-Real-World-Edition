@@ -1,16 +1,18 @@
 module "baselineAssignment" {
-  source = "./baseline-Assignment"
-  MgmtGroupID = "${data.azurerm_management_group.Parent.id}"
+  source = "./Baseline-Assignment"
+  MgmtGroupName = var.MgmtGroupName
+  SubscriptionID = var.SubscriptionID
 
-  Policy-AllowedLocations-ID = "${data.azurerm_policy_definition.Policy-AllowedLocations-ID.id}"
-  Policy-AllowedVMSKUs-ID = "${data.azurerm_policy_definition.Policy-AllowedVMSKUs-ID.id}"
-  Policy-AuditResourceGroupLocks-ID = "${data.azurerm_policy_definition.Policy-AuditResourceGroupLocks-ID.id}"
-  Policy-RestrictClassicResources-ID = "${data.azurerm_policy_definition.Policy-RestrictClassicResources-ID.id}"
+  PolicyDef_AllowedLocations_ID = var.PolicyDef_AllowedLocations_ID
+  PolicyDef_AllowedVMSKUs_ID = var.PolicyDef_AllowedVMSKUs_ID
+  PolicyDef_AuditResourceGroupLocks_ID = var.PolicyDef_AuditResourceGroupLocks_ID
+  PolicyDef_RestrictClassicResources_ID = var.PolicyDef_RestrictClassicResources_ID
 }
 
 module "initiativeAssignment" {
-  source = "./initiative-Assignment"
-  MgmtGroupID = "${data.azurerm_management_group.Parent.id}"
-  # Initiative-EnforceTags-ID = "${data.azurerm_policy_set_definition.Initiative-Tagging-ID.id}"
-  Initiative-EnforceTags-ID = "/providers/Microsoft.Management/managementgroups/${data.azurerm_management_group.Parent.group_id}/providers/Microsoft.Authorization/policySetDefinitions/AE-Initiative-AllResources-EnforceTags"
+  source = "./Initiative-Assignment"
+  MgmtGroupName = var.MgmtGroupName
+  SubscriptionID = var.SubscriptionID
+
+  PolicyInitiative_TaggingInitiative_ID = var.PolicyInitiative_TaggingInitiative_ID
 }

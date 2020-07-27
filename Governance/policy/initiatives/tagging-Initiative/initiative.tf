@@ -3,7 +3,7 @@ resource "azurerm_policy_set_definition" "TaggingInitiative" {
   policy_type  = "Custom"
   display_name = "DEMO-Initiative-Tags"
   description  = "This initiative contains all of the Tagging Policies."
-  management_group_id = var.MgmtGroupID
+  management_group_name = var.MgmtGroupName
   metadata = <<META
   {
     "category": "DEMO-Custom"
@@ -80,63 +80,104 @@ META
       }
     }
 PARAMETERS
-  policy_definitions = <<POLICY_DEFINITIONS
-    [
-      {
-        "parameters": {
-          "tagName": {
-              "value": "[parameters('CloudMaturityLevel-tagName')]"
-          },
-          "tagValue": {
-              "value": "[parameters('CloudMaturityLevel-tagValue')]"
-          }
-        },
-        "policyDefinitionId": "/providers/Microsoft.Management/managementgroups/${var.MgmtGroupID}/providers/Microsoft.Authorization/policyDefinitions/${var.EnforceTags-CloudMaturityLevel}"
-      },
-      {
-        "parameters": {
-          "tagName": {
-              "value": "[parameters('CostCenter-tagName')]"
-          },
-          "tagValue": {
-              "value": "[parameters('CostCenter-tagValue')]"
-          }
-        },
-        "policyDefinitionId": "/providers/Microsoft.Management/managementgroups/${var.MgmtGroupID}/providers/Microsoft.Authorization/policyDefinitions/${var.EnforceTags-CostCenter}"
-      },
-      {
-        "parameters": {
-          "tagName": {
-              "value": "[parameters('DisasterRecoveryServiceTier-tagName')]"
-          },
-          "tagValue": {
-              "value": "[parameters('DisasterRecoveryServiceTier-tagValue')]"
-          }
-        },
-        "policyDefinitionId": "/providers/Microsoft.Management/managementgroups/${var.MgmtGroupID}/providers/Microsoft.Authorization/policyDefinitions/${var.EnforceTags-DisasterRecoveryServiceTier}"
-      },
-      {
-        "parameters": {
-          "tagName": {
-              "value": "[parameters('Environment-tagName')]"
-          },
-          "tagValue": {
-              "value": "[parameters('Environment-tagValue')]"
-          }
-        },
-        "policyDefinitionId": "/providers/Microsoft.Management/managementgroups/${var.MgmtGroupID}/providers/Microsoft.Authorization/policyDefinitions/${var.EnforceTags-Environment}"
-      },
-      {
-        "parameters": {
-          "tagName": {
-              "value": "[parameters('ResourceID-tagName')]"
-          },
-          "tagValue": {
-              "value": "[parameters('ResourceID-tagValue')]"
-          }
-        },
-        "policyDefinitionId": "/providers/Microsoft.Management/managementgroups/${var.MgmtGroupID}/providers/Microsoft.Authorization/policyDefinitions/${var.EnforceTags-ResourceID}"
+
+  policy_definition_reference {
+    policy_definition_id = var.EnforceTags-CloudMaturityLevel
+    parameters = {
+        tagName = "[parameters('CloudMaturityLevel-tagName')]",
+        tagValue = "[parameters('CloudMaturityLevel-tagValue')]"
       }
-    ]
-POLICY_DEFINITIONS
+  }
+
+  policy_definition_reference {
+    policy_definition_id = var.EnforceTags-CostCenter
+    parameters = {
+        tagName = "[parameters('CostCenter-tagName')]",
+        tagValue = "[parameters('CostCenter-tagValue')]"
+      }
+  }
+
+  policy_definition_reference {
+    policy_definition_id = var.EnforceTags-DisasterRecoveryServiceTier
+    parameters = {
+        tagName = "[parameters('DisasterRecoveryServiceTier-tagName')]",
+        tagValue = "[parameters('DisasterRecoveryServiceTier-tagValue')]"
+      }
+  }
+
+  policy_definition_reference {
+    policy_definition_id = var.EnforceTags-Environment
+    parameters = {
+        tagName = "[parameters('Environment-tagName')]",
+        tagValue = "[parameters('Environment-tagValue')]"
+      }
+  }
+
+  policy_definition_reference {
+    policy_definition_id = var.EnforceTags-ResourceID
+    parameters = {
+        tagName = "[parameters('ResourceID-tagName')]",
+        tagValue = "[parameters('ResourceID-tagValue')]"
+      }
+  }
 }
+#   policy_definitions = <<POLICY_DEFINITIONS
+#     [
+#       {
+#         "parameters": {
+#           "tagName": {
+#               "value": "[parameters('CloudMaturityLevel-tagName')]"
+#           },
+#           "tagValue": {
+#               "value": "[parameters('CloudMaturityLevel-tagValue')]"
+#           }
+#         },
+#         "policyDefinitionId": "/providers/Microsoft.Management/managementgroups/${var.MgmtGroupName}/providers/Microsoft.Authorization/policyDefinitions/${var.EnforceTags-CloudMaturityLevel}"
+#       },
+#       {
+#         "parameters": {
+#           "tagName": {
+#               "value": "[parameters('CostCenter-tagName')]"
+#           },
+#           "tagValue": {
+#               "value": "[parameters('CostCenter-tagValue')]"
+#           }
+#         },
+#         "policyDefinitionId": "/providers/Microsoft.Management/managementgroups/${var.MgmtGroupName}/providers/Microsoft.Authorization/policyDefinitions/${var.EnforceTags-CostCenter}"
+#       },
+#       {
+#         "parameters": {
+#           "tagName": {
+#               "value": "[parameters('DisasterRecoveryServiceTier-tagName')]"
+#           },
+#           "tagValue": {
+#               "value": "[parameters('DisasterRecoveryServiceTier-tagValue')]"
+#           }
+#         },
+#         "policyDefinitionId": "/providers/Microsoft.Management/managementgroups/${var.MgmtGroupName}/providers/Microsoft.Authorization/policyDefinitions/${var.EnforceTags-DisasterRecoveryServiceTier}"
+#       },
+#       {
+#         "parameters": {
+#           "tagName": {
+#               "value": "[parameters('Environment-tagName')]"
+#           },
+#           "tagValue": {
+#               "value": "[parameters('Environment-tagValue')]"
+#           }
+#         },
+#         "policyDefinitionId": "/providers/Microsoft.Management/managementgroups/${var.MgmtGroupName}/providers/Microsoft.Authorization/policyDefinitions/${var.EnforceTags-Environment}"
+#       },
+#       {
+#         "parameters": {
+#           "tagName": {
+#               "value": "[parameters('ResourceID-tagName')]"
+#           },
+#           "tagValue": {
+#               "value": "[parameters('ResourceID-tagValue')]"
+#           }
+#         },
+#         "policyDefinitionId": "/providers/Microsoft.Management/managementgroups/${var.MgmtGroupName}/providers/Microsoft.Authorization/policyDefinitions/${var.EnforceTags-ResourceID}"
+#       }
+#     ]
+# POLICY_DEFINITIONS
+# }

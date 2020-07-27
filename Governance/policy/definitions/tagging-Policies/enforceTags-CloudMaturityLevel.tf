@@ -1,10 +1,10 @@
-resource "azurerm_policy_definition" "EnforceTags-CloudMaturityLevel" {
+resource "azurerm_policy_definition" "EnforceTags_CloudMaturityLevel" {
   name                = "DEMO-Policy-AllResources-EnforceTags-CloudMaturityLevel"
   policy_type         = "Custom"
   mode                = "Indexed"
   display_name        = "DEMO-Policy-AllResources-EnforceTags-CloudMaturityLevel"
   description         = "Enforce tagging requirements; specifically for the CloudMaturityLevel tag."
-  management_group_id = var.MgmtGroupID
+  management_group_name = var.MgmtGroupName
   metadata = <<META
   {
     "category": "DEMO-Custom"

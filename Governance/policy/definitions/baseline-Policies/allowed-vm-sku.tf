@@ -5,7 +5,7 @@ resource "azurerm_policy_definition" "AllowedVMSKUs" {
   mode                = "Indexed"
   display_name        = "DEMO-Policy-Compute-AllowedVMSKUs"
   description         = "This policy enables you to restrict the VM SKUs your organization can use when deploying resources."
-  management_group_id = var.MgmtGroupID
+  management_group_name = var.MgmtGroupName
   metadata = <<META
   {
     "category": "DEMO-Custom"
