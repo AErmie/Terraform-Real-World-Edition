@@ -1,5 +1,5 @@
 resource "azuredevops_project" "adoproj" {
-  project_name       = var.ADOProjectName
+  project_name       = "${var.ADOProjectName}-${random_integer.rndnum.result}"
   description        = var.ADOProjectDescription
   visibility         = var.ADOProjectVisibility
   version_control    = var.ADOVersionControl
