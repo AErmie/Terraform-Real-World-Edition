@@ -9,11 +9,12 @@ resource "azuredevops_build_definition" "HubDeployPipeline" {
   }
 
   variable_groups = [
-    azuredevops_variable_group.varGroup.id
+    azuredevops_variable_group.varGroup.id,
+    azuredevops_variable_group.varGroupPipe.id
   ]
 
   repository {
-    repo_type   = "TfsGit"
+    repo_type   = "TfsGit" # Options: GitHub, TfsGit, Bitbucket
     repo_id     = azuredevops_git_repository.new_repo.id
     branch_name = azuredevops_git_repository.new_repo.default_branch
     yml_path    = "Deploy_Hub.yml"
@@ -31,11 +32,12 @@ resource "azuredevops_build_definition" "SpokeDeployPipeline" {
   }
 
   variable_groups = [
-    azuredevops_variable_group.varGroup.id
+    azuredevops_variable_group.varGroup.id,
+    azuredevops_variable_group.varGroupPipe.id
   ]
 
   repository {
-    repo_type   = "TfsGit"
+    repo_type   = "TfsGit" # Options: GitHub, TfsGit, Bitbucket
     repo_id     = azuredevops_git_repository.new_repo.id
     branch_name = azuredevops_git_repository.new_repo.default_branch
     yml_path    = "Deploy_Spoke.yml"
@@ -53,11 +55,12 @@ resource "azuredevops_build_definition" "PeeringDeployPipeline" {
   }
 
   variable_groups = [
-    azuredevops_variable_group.varGroup.id
+    azuredevops_variable_group.varGroup.id,
+    azuredevops_variable_group.varGroupPipe.id
   ]
 
   repository {
-    repo_type   = "TfsGit"
+    repo_type   = "TfsGit" # Options: GitHub, TfsGit, Bitbucket
     repo_id     = azuredevops_git_repository.new_repo.id
     branch_name = azuredevops_git_repository.new_repo.default_branch
     yml_path    = "Deploy_Peering.yml"
