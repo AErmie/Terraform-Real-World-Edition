@@ -1,5 +1,5 @@
 module "baselineAssignment" {
-  source = "./baseline-Assignment"
+  source = "./Baseline-Assignment"
   MgmtGroupName = var.MgmtGroupName
   SubscriptionID = var.SubscriptionID
 
@@ -9,9 +9,10 @@ module "baselineAssignment" {
   PolicyDef_RestrictClassicResources_ID = var.PolicyDef_RestrictClassicResources_ID
 }
 
-# module "initiativeAssignment" {
-#   source = "./initiative-Assignment"
-#   MgmtGroupName = var.MgmtGroupName
-#   # Initiative-EnforceTags-ID = "${data.azurerm_policy_set_definition.Initiative-Tagging-ID.id}"
-#   Initiative-EnforceTags-ID = "/providers/Microsoft.Management/managementgroups/${data.azurerm_management_group.Parent.group_id}/providers/Microsoft.Authorization/policySetDefinitions/AE-Initiative-AllResources-EnforceTags"
-# }
+module "initiativeAssignment" {
+  source = "./Initiative-Assignment"
+  MgmtGroupName = var.MgmtGroupName
+  SubscriptionID = var.SubscriptionID
+
+  PolicyInitiative_TaggingInitiative_ID = var.PolicyInitiative_TaggingInitiative_ID
+}

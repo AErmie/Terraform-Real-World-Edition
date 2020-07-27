@@ -23,4 +23,6 @@ module "PolicyAssignment" {
   PolicyDef_AllowedVMSKUs_ID = module.PolicyDefinitions.PolicyDef_AllowedVMSKUs_ID
   PolicyDef_AuditResourceGroupLocks_ID = module.PolicyDefinitions.PolicyDef_AuditResourceGroupLocks_ID
   PolicyDef_RestrictClassicResources_ID = module.PolicyDefinitions.PolicyDef_RestrictClassicResources_ID
+
+  PolicyInitiative_TaggingInitiative_ID = module.PolicyInitiative.PolicyInitiative_TaggingInitiative_ID
 }

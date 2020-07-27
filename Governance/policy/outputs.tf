@@ -45,3 +45,7 @@ output "PolicyDef_AssignAuditResourceGroupLocks_AssignmentID" {
 output "PolicyDef_AssignRestrictClassicResources_AssignmentID" {
     value = module.PolicyAssignment.PolicyDef_AssignRestrictClassicResources_AssignmentID
 }
+
+output "PolicyInitiative_TaggingInitiative_AssignmentID" {
+  value = module.PolicyAssignment.PolicyInitiative_TaggingInitiative_AssignmentID
+}

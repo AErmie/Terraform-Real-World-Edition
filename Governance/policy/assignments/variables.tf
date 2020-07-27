@@ -23,3 +23,9 @@ variable "PolicyDef_RestrictClassicResources_ID" {
   type        = string
   description = "PolicyID for the RestrictClassicResources policy"
 }
+
+
+variable "PolicyInitiative_TaggingInitiative_ID" {
+  type        = string
+  description = "PolicyID for the Tagging initiative policy"
+}
