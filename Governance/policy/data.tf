@@ -7,3 +7,5 @@ data "terraform_remote_state" "MgmtGroup" {
     key                   = "governance_mgmtgroups.tfstate"
   }
 }
+
+data "azurerm_client_config" "current" {}

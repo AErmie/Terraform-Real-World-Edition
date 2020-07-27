@@ -1,9 +1,16 @@
 resource "azurerm_policy_assignment" "AssignAllowedLocations" {
   name                 = "DEMO-AllowedLocations"
-  scope                = var.MgmtGroupID
-  policy_definition_id = var.Policy-AllowedLocations-ID
+  scope                = "/subscriptions/${var.SubscriptionID}"
+  policy_definition_id = var.PolicyDef_AllowedLocations_ID
   description          = "Policy Assignment to restrict Resource locations."
   display_name         = "DEMO-AllowedLocations-Assignment"
+
+  metadata = <<METADATA
+    {
+    "category": "DEMO-Custom"
+    }
+METADATA
+
   parameters = <<PARAMETERS
     {
         "listOfAllowedLocations": {
@@ -15,10 +22,17 @@ PARAMETERS
 
 resource "azurerm_policy_assignment" "AssignAllowedVMSKUs" {
   name                 = "DEMO-AllowedVMSKUs"
-  scope                = var.MgmtGroupID
-  policy_definition_id = var.Policy-AllowedVMSKUs-ID
+  scope                = "/subscriptions/${var.SubscriptionID}"
+  policy_definition_id = var.PolicyDef_AllowedVMSKUs_ID
   description          = "Policy Assignment to restrict Resource VM SKUs."
   display_name         = "DEMO-AllowedVMSKUs-Assignment"
+
+  metadata = <<METADATA
+    {
+    "category": "DEMO-Custom"
+    }
+METADATA
+
   parameters = <<PARAMETERS
     {
         "listOfAllowedSKUs": {
@@ -30,10 +44,17 @@ PARAMETERS
 
 resource "azurerm_policy_assignment" "AssignAuditResourceGroupLocks" {
   name                 = "DEMO-AuditRGLocks"
-  scope                = var.MgmtGroupID
-  policy_definition_id = var.Policy-AuditResourceGroupLocks-ID
+  scope                = "/subscriptions/${var.SubscriptionID}"
+  policy_definition_id = var.PolicyDef_AuditResourceGroupLocks_ID
   description          = "Policy Assignment to audit Resource Group Delete Locks."
   display_name         = "DEMO-AuditResourceGroupLocks-Assignment"
+
+  metadata = <<METADATA
+    {
+    "category": "DEMO-Custom"
+    }
+METADATA
+
   parameters = <<PARAMETERS
     {
         "tagName": {
@@ -48,10 +69,17 @@ PARAMETERS
 
 resource "azurerm_policy_assignment" "AssignRestrictClassicResources" {
   name                 = "DEMO-RestrictClassicRes"
-  scope                = var.MgmtGroupID
-  policy_definition_id = var.Policy-RestrictClassicResources-ID
+  scope                = "/subscriptions/${var.SubscriptionID}"
+  policy_definition_id = var.PolicyDef_RestrictClassicResources_ID
   description          = "Policy Assignment to restrict the use of Classic resource types."
   display_name         = "DEMO-RestrictClassicResources-Assignment"
+
+  metadata = <<METADATA
+    {
+    "category": "DEMO-Custom"
+    }
+METADATA
+
   parameters = <<PARAMETERS
     {
     }   
