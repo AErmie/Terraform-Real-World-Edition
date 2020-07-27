@@ -13,8 +13,8 @@ For example, there is a separate module codebase for deploying ...
 
 Each respective codebase has it's own README file with additional details and instructions
 
-- [Azure DevOps](./AzureDevOps/README.md)
-- [Hub-and-Spoke](./Networking/README.md)
-- [Azure Governance])(./Governance/README.md)
+- [Azure DevOps](./AzureDevOps)
+- [Hub-and-Spoke Network](./Networking)
+- [Azure Governance](./Governance)
 
 **DISCLAIMER:** All code examples are provided as-is. Please ensure that you read the code before deploying it, to ensure you use the approprivate values applicable to your target environment.
