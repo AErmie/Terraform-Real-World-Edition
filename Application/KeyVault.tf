@@ -30,15 +30,60 @@ resource "azurerm_key_vault_access_policy" "KeyVault_Current_AccessPolicy" {
     object_id = data.azurerm_client_config.current.object_id
 
     key_permissions = [
-      "get","list","update","create","import","delete","recover","backup","restore"
+      "Get",
+      "List",
+      "Update",
+      "Restore",
+      "Backup",
+      "Recover",
+      "Delete",
+      "Import",
+      "Create",
     ]
 
     secret_permissions = [
-      "get","list","delete","recover","backup","restore","set"
+      "Get",
+      "List",
+      "Set",
+      "Delete",
+      "Recover",
+      "Backup",
+      "Restore",
     ]
 
     storage_permissions = [
+      "backup",
+      "delete",
+      "deletesas",
       "get",
+      "getsas",
+      "list",
+      "listsas",
+      "purge",
+      "recover",
+      "regeneratekey",
+      "restore",
+      "set",
+      "setsas",
+      "update",
+    ]
+
+    certificate_permissions = [
+      "Get",
+      "List",
+      "Update",
+      "Create",
+      "Import",
+      "Delete",
+      "Recover",
+      "Backup",
+      "Restore",
+      "ManageContacts",
+      "DeleteIssuers",
+      "SetIssuers",
+      "ListIssuers",
+      "ManageIssuers",
+      "GetIssuers",
     ]
   }
 
