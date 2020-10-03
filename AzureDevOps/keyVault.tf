@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "ADO_RG" {
-  name     = var.AzureKeyVault_ResourceGroup_Name
+  name     = "${var.AzureKeyVault_ResourceGroup_Name}-${random_integer.rndnum.result}"
   location = var.AzureKeyVault_ResourceGroup_Location
 }
 
