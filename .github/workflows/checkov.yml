@@ -1,25 +1,39 @@
 ---
-name: Checkov code analysis
+name: Checkov
 on:
   push:
     branches:
       - master
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.7.9 (x64)]
-#         python-version: [2.7.18, 3.5.10, 3.6.12, 3.7.9, 3.8.5]
-    
+        python-version: [3.7]
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python $
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v1
         with:
-          python-version: $
+          python-version: ${{ matrix.python-version }}
       - name: Test with Checkov
         run: |
           pip install checkov
           checkov -d .
+
+# jobs:
+#   checkov-job:
+#     runs-on: ubuntu-latest
+#     name: checkov-action
+#     steps:
+#       - name: Checkout repo
+#         uses: actions/checkout@master
+
+#       - name: Run Checkov action
+#         id: checkov
+#         uses: bridgecrewio/checkov-action@master
+#         with:
+#           directory: example/
+#           skip_check: CKV_AWS_1 # optional: skip a specific check_id
+#           quiet: true # optional: display only failed checks
+#           framework: terraform # optional: run only on a specific infrastructure {cloudformation,terraform,kubernetes,all}
