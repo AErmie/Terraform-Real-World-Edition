@@ -1,39 +1,39 @@
 ---
-name: Checkov
+name: Checkov Security Analysis
 on:
   push:
     branches:
       - master
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.7]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v1
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Test with Checkov
-        run: |
-          pip install checkov
-          checkov -d .
-
 # jobs:
-#   checkov-job:
+#   build:
 #     runs-on: ubuntu-latest
-#     name: checkov-action
+#     strategy:
+#       matrix:
+#         python-version: [3.7]
 #     steps:
-#       - name: Checkout repo
-#         uses: actions/checkout@master
-
-#       - name: Run Checkov action
-#         id: checkov
-#         uses: bridgecrewio/checkov-action@master
+#       - uses: actions/checkout@v2
+#       - name: Set up Python ${{ matrix.python-version }}
+#         uses: actions/setup-python@v1
 #         with:
-#           directory: example/
-#           skip_check: CKV_AWS_1 # optional: skip a specific check_id
-#           quiet: true # optional: display only failed checks
-#           framework: terraform # optional: run only on a specific infrastructure {cloudformation,terraform,kubernetes,all}
+#           python-version: ${{ matrix.python-version }}
+#       - name: Test with Checkov
+#         run: |
+#           pip install checkov
+#           checkov -d .
+
+jobs:
+  checkov-job:
+    runs-on: ubuntu-latest
+    name: checkov-action
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@master
+
+      - name: Run Checkov action
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: /
+          skip_check: CKV_AWS_1 # optional: skip a specific check_id
+          quiet: true # optional: display only failed checks
+          framework: terraform # optional: run only on a specific infrastructure {cloudformation,terraform,kubernetes,all}
