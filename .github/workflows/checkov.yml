@@ -8,9 +8,11 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-#     strategy:
-#       matrix:
-#         python-version: [3.7]
+    strategy:
+      matrix:
+        python-version: [3.7.9]
+#         python-version: [2.7.18, 3.5.10, 3.6.12, 3.7.9, 3.8.5]
+    
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python $
