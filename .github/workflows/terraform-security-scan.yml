@@ -1,0 +1,18 @@
+---
+name: Terraform Security Scan
+on:
+  push:
+    branches:
+      - master
+jobs:
+  tfsec:
+    name: TFSec
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Terraform security scan
+        uses: triat/terraform-security-scan@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
