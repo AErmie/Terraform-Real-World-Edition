@@ -29,8 +29,8 @@ stages:
       - bash: |
           mkdir TFSecReport
           docker pull liamg/tfsec:latest
-          docker run --rm -t -v $(System.DefaultWorkingDirectory):/src liamg/tfsec ./src
-          docker run --rm -t -v $(System.DefaultWorkingDirectory):/src liamg/tfsec ./src --format JUnit > $(System.DefaultWorkingDirectory)/TFSecReport/junit.xml
+          docker run --rm -t -v $(System.DefaultWorkingDirectory)/Networking:/src liamg/tfsec ./src
+          docker run --rm -t -v $(System.DefaultWorkingDirectory)/Networking:/src liamg/tfsec ./src --format JUnit > $(System.DefaultWorkingDirectory)/TFSecReport/junit.xml
         displayName: TFSec Static Code Analysis
         name: TFSecScan
         condition: always()
