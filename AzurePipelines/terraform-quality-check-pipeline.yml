@@ -1,0 +1,56 @@
+trigger: none
+  # branches:
+  #   include:
+  #     - master
+  #     - main
+  #   exclude:
+  #     - feature/*
+  # tags:
+  #   exclude:
+  #     - '*'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+# variables:
+
+stages:
+- stage: QualityCheckStage
+  displayName: Quality Check Stage
+  jobs:
+    - job: QualityTestJob
+      displayName: Run TFSec
+      steps:
+      # TFSec uses static analysis of Terraform templates to spot potential security issues, and 
+      # checks for violations of AWS, Azure and GCP security best practice recommendations.
+      # NOTE: To disable a specific check from analysis, include it in the command-line as 
+      # follows: -e GEN001,GCP001,GCP002
+      # Documentation: https://github.com/tfsec/tfsec
+      - bash: |
+          mkdir TFSecReport
+          docker pull liamg/tfsec:latest
+          docker run --rm -t -v $(System.DefaultWorkingDirectory):/src liamg/tfsec ./src
+          docker run --rm -t -v $(System.DefaultWorkingDirectory):/src liamg/tfsec ./src --format JUnit > $(System.DefaultWorkingDirectory)/TFSecReport/junit.xml
+        displayName: TFSec Static Code Analysis
+        name: TFSecScan
+        condition: always()
+
+      # Publish to Azure Pipelines
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish Artifact: TFSec Report'
+        condition: succeededOrFailed()
+        inputs:
+          PathtoPublish: '$(System.DefaultWorkingDirectory)/TFSecReport'
+          ArtifactName: TFSecReport
+
+      # Publish the results of the TFSec analysis as Test Results to the pipeline
+      - task: PublishTestResults@2
+        displayName: Publish TFSecReport Test Results
+        condition: succeededOrFailed()
+        inputs:
+          testResultsFormat: 'JUnit' # Options JUnit, NUnit, VSTest, xUnit, cTest
+          testResultsFiles: '**/junit.xml'
+          searchFolder: '$(System.DefaultWorkingDirectory)/TFSecReport'
+          mergeTestResults: false
+          failTaskOnFailedTests: false
+          publishRunAttachments: true
