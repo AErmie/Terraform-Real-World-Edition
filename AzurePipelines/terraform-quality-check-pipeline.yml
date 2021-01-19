@@ -19,7 +19,7 @@ stages:
   displayName: Quality Check Stage
   jobs:
     - job: QualityTestJob
-      displayName: Run TFSec
+      displayName: Run GitHub Super-Linter
       steps:
       # Checkov is a static code analysis tool for infrastructure-as-code.
       # It scans cloud infrastructure provisioned using Terraform, Cloudformation, Kubernetes, Serverless 
@@ -27,50 +27,50 @@ stages:
       # Documentation: https://github.com/bridgecrewio/checkov
       # NOTE: If you want to skip a specific check from the analysis, include it in the command-line as 
       # follows: --skip-check CKV_AWS_70,CKV_AWS_52,CKV_AWS_21,CKV_AWS_18,CKV_AWS_19
-      - script: |
-          mkdir CheckovReport
-          docker pull bridgecrew/checkov
-          docker run -t -v $(System.DefaultWorkingDirectory)/Networking:/tf bridgecrew/checkov --directory /tf
-          docker run -t -v $(System.DefaultWorkingDirectory)/Networking:/tf bridgecrew/checkov --directory /tf --output junitxml > $(System.DefaultWorkingDirectory)/CheckovReport/Checkov-Report.xml
-        displayName: 'Checkov Static Code Analysis'
-        name: CheckovScan
-        condition: always()
+      # - script: |
+      #     mkdir CheckovReport
+      #     docker pull bridgecrew/checkov
+      #     docker run -t -v $(System.DefaultWorkingDirectory)/Networking:/tf bridgecrew/checkov --directory /tf
+      #     docker run -t -v $(System.DefaultWorkingDirectory)/Networking:/tf bridgecrew/checkov --directory /tf --output junitxml > $(System.DefaultWorkingDirectory)/CheckovReport/Checkov-Report.xml
+      #   displayName: 'Checkov Static Code Analysis'
+      #   name: CheckovScan
+      #   condition: always()
       
       # The following SED command is used to remove the footer line in a file. 
       # The $ indicates the last line of a file.
       # The SED command prints the contents of the file on the unix or linux terminal by removing the lines. 
       # However the SED command does not remove the lines from the source file. 
       # To Remove the lines from the source file itself, use the -i option with SED command.
-      - script: |
-          sed -i '$d' $(System.DefaultWorkingDirectory)/CheckovReport/Checkov-Report.xml
-          sed -i '$d' $(System.DefaultWorkingDirectory)/CheckovReport/Checkov-Report.xml
-        displayName: 'Removing the last 2 lines from the Checkov Report'
-        name: CheckovReportCleanup
-        condition: always()
+      # - script: |
+      #     sed -i '$d' $(System.DefaultWorkingDirectory)/CheckovReport/Checkov-Report.xml
+      #     sed -i '$d' $(System.DefaultWorkingDirectory)/CheckovReport/Checkov-Report.xml
+      #   displayName: 'Removing the last 2 lines from the Checkov Report'
+      #   name: CheckovReportCleanup
+      #   condition: always()
       
       # Publish the Checkov report as an artifact to Azure Pipelines
-      - task: PublishBuildArtifacts@1
-        displayName: 'Publish Artifact: Checkov Report'
-        condition: succeededOrFailed()
-        inputs:
-          PathtoPublish: '$(System.DefaultWorkingDirectory)/CheckovReport'
-          ArtifactName: CheckovReport
+      # - task: PublishBuildArtifacts@1
+      #   displayName: 'Publish Artifact: Checkov Report'
+      #   condition: succeededOrFailed()
+      #   inputs:
+      #     PathtoPublish: '$(System.DefaultWorkingDirectory)/CheckovReport'
+      #     ArtifactName: CheckovReport
 
       # Publish the results of the Checkov analysis as Test Results to the pipeline
       # NOTE: There is a current issue with the produced XML that fails to publish the test results correctly.
       # Discussed issue with BridgeCrew, which is looking into it.
       # Work-around is to include the Script step to remove the last 2 lines from the file before processing.
-      - task: PublishTestResults@2
-        displayName: Publish Checkov Test Results
-        condition: succeededOrFailed()
-        inputs:
-          testResultsFormat: 'JUnit' # Options JUnit, NUnit, VSTest, xUnit, cTest
-          testResultsFiles: '**/*Checkov-Report.xml'
-          searchFolder: '$(System.DefaultWorkingDirectory)/CheckovReport'
-          mergeTestResults: false
-          testRunTitle: Checkov Scan
-          failTaskOnFailedTests: false
-          publishRunAttachments: true
+      # - task: PublishTestResults@2
+      #   displayName: Publish Checkov Test Results
+      #   condition: succeededOrFailed()
+      #   inputs:
+      #     testResultsFormat: 'JUnit' # Options JUnit, NUnit, VSTest, xUnit, cTest
+      #     testResultsFiles: '**/*Checkov-Report.xml'
+      #     searchFolder: '$(System.DefaultWorkingDirectory)/CheckovReport'
+      #     mergeTestResults: false
+      #     testRunTitle: Checkov Scan
+      #     failTaskOnFailedTests: false
+      #     publishRunAttachments: true
 
 
       # TFSec uses static analysis of Terraform templates to spot potential security issues, and 
@@ -78,35 +78,35 @@ stages:
       # NOTE: To disable a specific check from analysis, include it in the command-line as 
       # follows: -e GEN001,GCP001,GCP002
       # Documentation: https://github.com/tfsec/tfsec
-      - bash: |
-          mkdir TFSecReport
-          docker pull liamg/tfsec:latest
-          docker run --rm -t -v $(System.DefaultWorkingDirectory)/Networking:/src liamg/tfsec ./src
-          docker run --rm -t -v $(System.DefaultWorkingDirectory)/Networking:/src liamg/tfsec ./src --format JUnit > $(System.DefaultWorkingDirectory)/TFSecReport/TFSec-Report.xml
-        displayName: TFSec Static Code Analysis
-        name: TFSecScan
-        condition: always()
+      # - bash: |
+      #     mkdir TFSecReport
+      #     docker pull liamg/tfsec:latest
+      #     docker run --rm -t -v $(System.DefaultWorkingDirectory)/Networking:/src liamg/tfsec ./src
+      #     docker run --rm -t -v $(System.DefaultWorkingDirectory)/Networking:/src liamg/tfsec ./src --format JUnit > $(System.DefaultWorkingDirectory)/TFSecReport/TFSec-Report.xml
+      #   displayName: TFSec Static Code Analysis
+      #   name: TFSecScan
+      #   condition: always()
 
       # Publish the TFSec report as an artifact to Azure Pipelines
-      - task: PublishBuildArtifacts@1
-        displayName: 'Publish Artifact: TFSec Report'
-        condition: succeededOrFailed()
-        inputs:
-          PathtoPublish: '$(System.DefaultWorkingDirectory)/TFSecReport'
-          ArtifactName: TFSecReport
+      # - task: PublishBuildArtifacts@1
+      #   displayName: 'Publish Artifact: TFSec Report'
+      #   condition: succeededOrFailed()
+      #   inputs:
+      #     PathtoPublish: '$(System.DefaultWorkingDirectory)/TFSecReport'
+      #     ArtifactName: TFSecReport
 
       # Publish the results of the TFSec analysis as Test Results to the pipeline
-      - task: PublishTestResults@2
-        displayName: Publish TFSecReport Test Results
-        condition: succeededOrFailed()
-        inputs:
-          testResultsFormat: 'JUnit' # Options JUnit, NUnit, VSTest, xUnit, cTest
-          testResultsFiles: '**/*TFSec-Report.xml'
-          searchFolder: '$(System.DefaultWorkingDirectory)/TFSecReport'
-          testRunTitle: TFSec Scan
-          mergeTestResults: false
-          failTaskOnFailedTests: false
-          publishRunAttachments: true
+      # - task: PublishTestResults@2
+      #   displayName: Publish TFSecReport Test Results
+      #   condition: succeededOrFailed()
+      #   inputs:
+      #     testResultsFormat: 'JUnit' # Options JUnit, NUnit, VSTest, xUnit, cTest
+      #     testResultsFiles: '**/*TFSec-Report.xml'
+      #     searchFolder: '$(System.DefaultWorkingDirectory)/TFSecReport'
+      #     testRunTitle: TFSec Scan
+      #     mergeTestResults: false
+      #     failTaskOnFailedTests: false
+      #     publishRunAttachments: true
 
       # The GitHub Super-Linter runs a combination of various linters, written in bash, 
       # to help validate your source code.
