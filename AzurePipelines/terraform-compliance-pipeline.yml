@@ -54,7 +54,7 @@ stages:
 
       - script: |
           docker pull eerkunt/terraform-compliance
-          docker run --rm --volume $(System.DefaultWorkingDirectory):/target -i eerkunt/terraform-compliance --features git:https://github.com/terraform-compliance/user-friendly-features.git --planfile plan.out
+          docker run --rm --volume $(System.DefaultWorkingDirectory)/Networking/Deployments/Network-Deployment/Hub-Deploy:/target -i eerkunt/terraform-compliance --features git:https://github.com/terraform-compliance/user-friendly-features.git --planfile plan.out
         displayName: 'Terraform Compliance Check'
         name: TerraformCompliance
         condition: always()
