@@ -14,7 +14,7 @@ pool:
 
 variables:
 - name: terraformVersion
-  value: 0.14.3
+  value: 0.14.5
 
 stages:
 - stage: QualityCheckStage
@@ -25,6 +25,7 @@ stages:
       steps:
       # First, we need to install Terraform
       - task: TerraformInstaller@0
+        displayName: Installing Terraform v$(terraformVersion)
         inputs:
           terraformVersion: $(terraformVersion)
       
