@@ -48,7 +48,8 @@ stages:
         inputs:
           provider: 'azurerm'
           command: 'plan'
-          commandOptions: '-out="tf.plan"'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/Networking/Deployments/Network-Deployment/Hub-Deploy'
+          commandOptions: '-var-file="Hub.tfvars" -out="tf.plan"'
           environmentServiceNameAzureRM: 'Visual Studio Enterprise(1)(c28db86b-8ce1-4755-aa09-fc99f6e0a667)'
 
       - script: |
