@@ -7,8 +7,8 @@ stages:
 - stage: QualityCheckStage
   displayName: Quality Check Stage
   jobs:
-    - job: QualityTestJob
-      displayName: Run Checkov
+    - job: TFSecJob
+      displayName: Run TFSec Scan
       steps:
       # TFSec uses static analysis of Terraform templates to spot potential security issues, and 
       # checks for violations of AWS, Azure and GCP security best practice recommendations.

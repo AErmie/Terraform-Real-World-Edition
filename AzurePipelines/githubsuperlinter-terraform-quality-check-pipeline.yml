@@ -7,8 +7,8 @@ stages:
 - stage: QualityCheckStage
   displayName: Quality Check Stage
   jobs:
-    - job: QualityTestJob
-      displayName: Run Checkov
+    - job: GHLintJob
+      displayName: Run GitHub Super-Linter Scan
       steps:
       # The GitHub Super-Linter runs a combination of various linters, written in bash, 
       # to help validate your source code.

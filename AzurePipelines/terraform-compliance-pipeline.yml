@@ -20,8 +20,8 @@ stages:
 - stage: QualityCheckStage
   displayName: Quality Check Stage
   jobs:
-    - job: QualityTestJob
-      displayName: Run Terraform-Compliance
+    - job: TFComplianceJob
+      displayName: Run Terraform-Compliance Scan
       steps:
       # First, we need to install Terraform
       - task: TerraformInstaller@0

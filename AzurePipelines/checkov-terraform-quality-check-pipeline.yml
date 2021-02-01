@@ -7,8 +7,8 @@ stages:
 - stage: QualityCheckStage
   displayName: Quality Check Stage
   jobs:
-    - job: QualityTestJob
-      displayName: Run Checkov
+    - job: CheckovJob
+      displayName: Run Checkov Scan
       steps:
       # Checkov is a static code analysis tool for infrastructure-as-code.
       # It scans cloud infrastructure provisioned using Terraform, Cloudformation, Kubernetes, Serverless 
