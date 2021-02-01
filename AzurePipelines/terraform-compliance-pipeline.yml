@@ -54,11 +54,32 @@ stages:
           environmentServiceNameAzureRM: 'Visual Studio Enterprise(1)(c28db86b-8ce1-4755-aa09-fc99f6e0a667)'
 
       - script: |
+          mkdir TerraformCompliance
           docker pull eerkunt/terraform-compliance
-          docker run --rm --volume $(System.DefaultWorkingDirectory)/Networking/Deployments/Network-Deployment/Hub-Deploy:/target -i eerkunt/terraform-compliance --features git:https://github.com/terraform-compliance/user-friendly-features.git --planfile plan.out
+          docker run --rm --volume $(System.DefaultWorkingDirectory)/Networking/Deployments/Network-Deployment/Hub-Deploy:/target -i eerkunt/terraform-compliance --features git:https://github.com/terraform-compliance/user-friendly-features.git --planfile plan.out > $(System.DefaultWorkingDirectory)/TerraformCompliance/TFCompliance-Report.xml
         displayName: 'Terraform Compliance Check'
         name: TerraformCompliance
         condition: always()
+
+      - task: PublishTestResults@2
+        displayName: Publish TerraformCompliance Test Results
+        condition: succeededOrFailed()
+        inputs:
+          testResultsFormat: 'JUnit' # Options JUnit, NUnit, VSTest, xUnit, cTest
+          testResultsFiles: '**/*TFCompliance-Report.xml'
+          searchFolder: '$(System.DefaultWorkingDirectory)/TerraformCompliance'
+          mergeTestResults: false
+          testRunTitle: TerraformCompliance Scan
+          failTaskOnFailedTests: false
+          publishRunAttachments: true
+
+
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish Artifact: TerraformCompliance Report'
+        condition: succeededOrFailed()
+        inputs:
+          PathtoPublish: '$(System.DefaultWorkingDirectory)/TerraformCompliance'
+          ArtifactName: TerraformComplianceReport
 
       # Clean up any of the containers / images that were used for quality checks
       - bash: |
