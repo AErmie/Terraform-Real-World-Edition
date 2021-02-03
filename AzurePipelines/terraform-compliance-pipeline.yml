@@ -56,12 +56,14 @@ stages:
       # Running Terraform-Compliance
       # NOTE: Will have to run scan twice, once to receive the output (which does not show in terminal), and
       # a second time for terminal display
-      - script: |
+      - script: | 
           mkdir TerraformComplianceReport
           docker pull eerkunt/terraform-compliance
           docker run --volume $(System.DefaultWorkingDirectory)/TerraformComplianceTests/azure/Storage/failing_setups/not_enable_https_traffic_only/:/target --name TFComply --interactive eerkunt/terraform-compliance --junit-xml TFCompliance-Report.xml --features git:https://github.com/terraform-compliance/user-friendly-features.git --planfile plan.out.json
           docker cp TFComply:/target/TFCompliance-Report.xml $(System.DefaultWorkingDirectory)/TerraformComplianceReport
-          docker run --rm --volume $(System.DefaultWorkingDirectory)/TerraformComplianceTests/azure/Storage/failing_setups/not_enable_https_traffic_only/:/target --interactive eerkunt/terraform-compliance --features git:https://github.com/terraform-compliance/user-friendly-features.git --planfile plan.out.json
+          $TFCompli = docker inspect TFComply --format='{{.State.ExitCode}}'
+          exit $TFCompli
+          # docker run --rm --volume $(System.DefaultWorkingDirectory)/TerraformComplianceTests/azure/Storage/failing_setups/not_enable_https_traffic_only/:/target --interactive eerkunt/terraform-compliance --features git:https://github.com/terraform-compliance/user-friendly-features.git --planfile plan.out.json
         displayName: 'Terraform Compliance Check'
         name: TerraformCompliance
         condition: always()
