@@ -1,0 +1,19 @@
+trigger: none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+- stage: QualityCheckStage
+  displayName: Quality Check Stage
+  jobs:
+    - job: WhiteSourceBoldJob
+      displayName: Run WhiteSource Bolt Scan
+      steps:
+      - task: WhiteSource Bolt@20
+        displayName: Running WhiteSource Bolt
+        inputs:
+          cwd: '$(System.DefaultWorkingDirectory)'
+          advance: false
+          # exclude: 'exclude'
+          # extraFolders: '/extrascan'
