@@ -7,11 +7,35 @@ jobs:
     runs-on: ubuntu-latest
     name: InfraCost
     steps:
-      - name: InfraCost
-        uses: infracost/infracost-gh-action
-        with:
-          # Path to the Terraform directory or JSON/plan file. Either `path` or `config_file` is required.
-          path: ./Application
+    - name: Check out repository
+      uses: actions/checkout@v2
 
-          # Flags to pass to the 'terraform plan' command, e.g. `"-var-file=my.tfvars -var-file=other.tfvars"`. Applicable when path is a Terraform directory.
-          terraform_plan_flags: "-var-file=app.tfvars"
+    - name: "Install terraform"
+      uses: hashicorp/setup-terraform@v1
+
+    - name: "Terraform init"
+      id: init
+      run: terraform init
+      working-directory: ./Application
+
+    - name: "Terraform plan"
+      id: plan
+      run: terraform plan -var-file=app.tfvars -out plan.tfplan
+      working-directory: ./Application
+
+    - name: "Terraform show"
+      id: show
+      run: terraform show -json plan.tfplan
+      working-directory: ./Application
+      
+    - name: "Save Plan JSON"
+      run: echo '${{ steps.show.outputs.stdout }}' > plan.json # Do not change
+
+    - name: Run infracost diff
+      uses: infracost/infracost-gh-action@master # Use a specific version instead of master if locking is preferred
+      env:
+        INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        entrypoint: /scripts/ci/diff.sh # Do not change
+        path: plan.json # Do not change
