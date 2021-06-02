@@ -1,0 +1,17 @@
+name: Infracost
+on:
+  workflow_dispatch:
+
+jobs:
+  infracost:
+    runs-on: ubuntu-latest
+    name: InfraCost
+    steps:
+      - name: InfraCost
+        uses: infracost/infracost-gh-action
+        with:
+          # Path to the Terraform directory or JSON/plan file. Either `path` or `config_file` is required.
+          path: ./Application
+
+          # Flags to pass to the 'terraform plan' command, e.g. `"-var-file=my.tfvars -var-file=other.tfvars"`. Applicable when path is a Terraform directory.
+          terraform_plan_flags: "-var-file=app.tfvars"
