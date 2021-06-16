@@ -1,5 +1,6 @@
 output "StorageAccount_PrimaryConnectionString"{
-     value = azurerm_storage_account.application_storage.primary_connection_string
+    sensitive = true
+    value = azurerm_storage_account.application_storage.primary_connection_string
  }
 
  output "AzureDataFactory_PrincipalID"{
